@@ -72,7 +72,50 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+Server.py
+~~~
+import socket
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = '0.0.0.0'  
+port = 12345
+server_socket.bind((host, port))
+server_socket.listen(1)
+print("Server is waiting for connection...")
+conn, addr = server_socket.accept()
+print("Connected to client:", addr()
+while True:
+    client_msg = conn.recv(1024).decode()
+    if client_msg.lower() == "exit":
+        print("Client disconnected.")
+        break
+    print("Client:", client_msg)
+    server_msg = input("Server: ")
+    conn.send(server_msg.encode())
+conn.close()
+server_socket.close()
+~~~~
+Client.py
+~~~
+import socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = '127.0.0.1'   
+port = 12345
+client_socket.connect((host, port))
+print("Connected to server.")
+while True:
+    msg = input("Client: ")
+    client_socket.send(msg.encode())
+    if msg.lower() == "exit":
+        break
+     server_reply = client_socket.recv(1024).decode()
+    print("Server:", server_reply)
 
+client_socket.close()
+~~~
+server:
+<img width="1073" height="184" alt="Screenshot 2026-02-04 130405" src="https://github.com/user-attachments/assets/d9482858-e20d-423d-a926-1b8bdd58cc24" />
+client:
+<img width="1204" height="203" alt="Screenshot 2026-02-04 130329" src="https://github.com/user-attachments/assets/15366fd3-de70-4ad5-89f2-fdd56378e5af" />
 
 ## Result:
 
